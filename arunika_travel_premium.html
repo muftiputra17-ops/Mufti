@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173d35">
+  <meta name="description" content="Arunika Travel — temukan perjalanan yang terasa istimewa. Jelajahi destinasi pilihan Indonesia dengan paket perjalanan yang dirancang untukmu.">
+  <title>Arunika Travel — Perjalanan yang Berarti</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --forest: #173d35;
+      --forest-2: #24574b;
+      --forest-3: #dce8df;
+      --gold: #c69d60;
+      --gold-light: #f1e6d3;
+      --ink: #202c28;
+      --muted: #75817b;
+      --paper: #f8f7f2;
+      --white: #fffefa;
+      --line: #e7e7df;
+      --shadow: 0 18px 55px rgba(24, 48, 39, .10);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+    body { background: var(--paper); color: var(--ink); font-family: "DM Sans", sans-serif; line-height: 1.65; }
+    body.no-scroll { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    button { color: inherit; }
+    img { display: block; width: 100%; }
+    .container { width: min(1200px, 91.5%); margin-inline: auto; }
+    .serif { font-family: "Playfair Display", Georgia, serif; font-weight: 500; letter-spacing: -.8px; }
+    .muted { color: var(--muted); }
+    .eyebrow { color: var(--forest-2); display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--gold); display: inline-block; }
+    .section { padding: 92px 0; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 32px; }
+    .section-heading h2 { font: 500 clamp(2.25rem, 4.5vw, 3.65rem)/1.12 "Playfair Display", Georgia, serif; letter-spacing: -1px; margin-top: 13px; }
+    .section-heading p { max-width: 475px; color: var(--muted); margin-top: 13px; font-size: .96rem; }
+    .btn { border: 1px solid transparent; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 13px 21px; font-weight: 700; font-size: .88rem; cursor: pointer; transition: transform .2s, background .2s, color .2s, border-color .2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { color: white; background: var(--forest); }
+    .btn-primary:hover { background: var(--forest-2); }
+    .btn-gold { background: var(--gold); color: #172b25; }
+    .btn-gold:hover { background: #d8b47b; }
+    .btn-outline { border-color: #d7ddd5; background: transparent; }
+    .btn-outline:hover { border-color: var(--forest); color: var(--forest); }
+    .icon-btn { border: 0; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; cursor: pointer; background: rgba(255,254,250,.95); font-size: 1.15rem; transition: .2s; }
+    .icon-btn:hover { transform: scale(1.06); }
+    .icon-btn.saved { color: #c94c45; background: white; }
+
+    /* Navigation */
+    .site-header { position: sticky; top: 0; z-index: 50; background: rgba(248,247,242,.92); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(231,231,223,.8); }
+    .nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 25px; }
+    .brand { display: inline-flex; gap: 10px; align-items: center; font: 800 1.28rem Manrope, sans-serif; letter-spacing: -.9px; white-space: nowrap; }
+    .brand-mark { width: 37px; height: 37px; display: grid; place-items: center; border-radius: 50% 50% 50% 12px; background: var(--forest); color: var(--gold-light); font-size: 1.1rem; }
+    .brand-text span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: clamp(16px, 2.5vw, 32px); font-size: .86rem; font-weight: 600; color: #56645d; }
+    .nav-links a { padding-block: 12px; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--forest); }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .menu-toggle { display: none; background: transparent; border: 1px solid var(--line); width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; }
+
+    /* Hero */
+    .hero { padding: 27px 0 0; }
+    .hero-panel { background: var(--forest); min-height: 575px; border-radius: 28px; display: grid; grid-template-columns: .96fr 1.04fr; overflow: hidden; position: relative; color: white; isolation: isolate; }
+    .hero-copy { padding: clamp(38px, 5vw, 72px); align-self: center; position: relative; z-index: 2; }
+    .hero-copy .eyebrow { color: #d4bd93; }
+    .hero-copy h1 { font: 500 clamp(3.1rem, 5.5vw, 5.5rem)/1.02 "Playfair Display", Georgia, serif; letter-spacing: -2.2px; margin: 24px 0 20px; max-width: 650px; }
+    .hero-copy h1 em { color: #d8b67d; font-weight: 500; }
+    .hero-copy > p { color: #d3dfd8; max-width: 460px; font-size: 1rem; }
+    .hero-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .hero-copy .btn-outline { color: white; border-color: rgba(255,255,255,.32); }
+    .hero-copy .btn-outline:hover { background: white; color: var(--forest); }
+    .hero-proof { display: flex; align-items: center; gap: 13px; margin-top: 35px; color: #d5dfd9; font-size: .8rem; }
+    .proof-avatars { display: flex; padding-left: 5px; }
+    .proof-avatars img { width: 34px; height: 34px; border: 2px solid var(--forest); border-radius: 50%; object-fit: cover; margin-left: -6px; }
+    .hero-proof strong { color: white; }
+    .hero-visual { position: relative; min-height: 575px; }
+    .hero-visual > img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+    .hero-visual::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--forest) 0%, rgba(23,61,53,.1) 42%, rgba(23,61,53,.02) 100%); }
+    .hero-location { position: absolute; z-index: 2; right: 26px; top: 25px; padding: 11px 15px; border-radius: 999px; background: rgba(255,254,250,.95); color: var(--forest); font-size: .78rem; font-weight: 800; }
+    .hero-caption { position: absolute; z-index: 2; right: 28px; bottom: 27px; background: rgba(255,254,250,.94); color: var(--ink); border-radius: 17px; padding: 14px 17px; min-width: 190px; box-shadow: var(--shadow); }
+    .hero-caption small { color: var(--muted); display: block; font-size: .7rem; }
+    .hero-caption strong { display: block; font-family: "Playfair Display", Georgia, serif; font-size: 1.1rem; }
+    .hero-caption span { color: #bd8e49; font-size: .76rem; }
+
+    /* Search panel */
+    .search-shell { position: relative; z-index: 3; margin-top: -29px; }
+    .search-panel { display: grid; grid-template-columns: 1.1fr 1fr 1fr auto; gap: 8px; align-items: center; padding: 13px; background: var(--white); border: 1px solid var(--line); border-radius: 19px; box-shadow: 0 15px 45px rgba(22,50,39,.1); }
+    .search-field { padding: 7px 15px; border-right: 1px solid var(--line); min-width: 0; }
+    .search-field label { display: block; font-weight: 700; color: var(--muted); font-size: .71rem; margin-bottom: 2px; }
+    .search-field input, .search-field select { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--ink); font-weight: 700; font-size: .88rem; }
+    .search-field input::placeholder { color: #9da69f; font-weight: 500; }
+
+    /* Trip cards */
+    .destinations-section { padding-top: 95px; }
+    .section-heading .side-link { flex-shrink: 0; color: var(--forest); font-size: .86rem; font-weight: 800; border-bottom: 1px solid var(--gold); padding-bottom: 5px; }
+    .trip-toolbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 25px; }
+    .filter-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .chip { border: 1px solid #dedfd6; border-radius: 99px; padding: 9px 16px; background: transparent; font-size: .79rem; font-weight: 700; cursor: pointer; transition: .2s; }
+    .chip:hover { border-color: var(--forest); }
+    .chip.active { background: var(--forest); color: white; border-color: var(--forest); }
+    .toolbar-right { display: flex; align-items: center; gap: 10px; }
+    .results-count { color: var(--muted); font-size: .8rem; }
+    .sort-select { background: white; border: 1px solid var(--line); border-radius: 999px; padding: 10px 14px; outline: 0; font-size: .79rem; }
+    .trip-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 23px; }
+    .trip-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: transform .25s, box-shadow .25s; min-width: 0; }
+    .trip-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .trip-image { position: relative; height: 235px; overflow: hidden; background: #e5e7dd; }
+    .trip-image img { height: 100%; object-fit: cover; transition: transform .55s; }
+    .trip-card:hover .trip-image img { transform: scale(1.045); }
+    .trip-badge { position: absolute; left: 15px; top: 15px; background: rgba(255,254,250,.95); border-radius: 999px; padding: 6px 11px; font-size: .69rem; font-weight: 800; }
+    .trip-image .icon-btn { position: absolute; top: 12px; right: 12px; }
+    .trip-content { padding: 19px 19px 17px; }
+    .trip-place { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: var(--muted); text-transform: uppercase; font-size: .66rem; letter-spacing: .75px; font-weight: 800; }
+    .trip-rating { color: #a87631; font-size: .75rem; letter-spacing: 0; white-space: nowrap; }
+    .trip-title { font: 600 1.35rem/1.25 "Playfair Display", Georgia, serif; margin: 10px 0 8px; letter-spacing: -.3px; }
+    .trip-description { font-size: .82rem; color: var(--muted); min-height: 52px; }
+    .trip-meta { display: flex; flex-wrap: wrap; gap: 12px; padding: 14px 0; margin-top: 10px; border-bottom: 1px solid var(--line); color: #65716b; font-size: .72rem; }
+    .trip-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 14px; }
+    .trip-price small { display: block; color: var(--muted); font-size: .68rem; }
+    .trip-price strong { font: 800 1.08rem Manrope, sans-serif; color: var(--forest); }
+    .trip-price span { font-size: .7rem; color: var(--muted); font-weight: 500; }
+    .trip-book { border: 0; background: var(--forest); color: white; padding: 10px 13px; border-radius: 999px; font-size: .75rem; font-weight: 800; cursor: pointer; white-space: nowrap; transition: .2s; }
+    .trip-book:hover { background: var(--gold); color: var(--ink); }
+    .empty-state { grid-column: 1/-1; text-align: center; background: white; padding: 45px 20px; border: 1px dashed #d7dcd2; border-radius: var(--radius); color: var(--muted); }
+    .load-row { display: flex; justify-content: center; margin-top: 34px; }
+
+    /* Editorial / about */
+    .editorial { background: #edf0e8; overflow: hidden; }
+    .editorial-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(35px, 6vw, 80px); }
+    .editorial-photos { position: relative; min-height: 485px; }
+    .editorial-main { width: 82%; height: 435px; object-fit: cover; border-radius: 160px 160px 20px 20px; }
+    .editorial-small { position: absolute; width: 44%; height: 205px; object-fit: cover; right: 0; bottom: 0; border: 8px solid #edf0e8; border-radius: 18px; }
+    .editorial-stamp { position: absolute; width: 92px; height: 92px; border-radius: 50%; display: grid; place-items: center; text-align: center; background: var(--gold); color: var(--forest); font-size: .7rem; font-weight: 800; line-height: 1.25; top: 25px; right: 0; transform: rotate(9deg); border: 6px solid #edf0e8; }
+    .editorial-copy h2 { font: 500 clamp(2.35rem, 4.2vw, 3.75rem)/1.1 "Playfair Display", Georgia, serif; margin: 16px 0; letter-spacing: -1.2px; }
+    .editorial-copy > p { color: var(--muted); font-size: .94rem; }
+    .benefit-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; margin-top: 29px; }
+    .benefit-list li { display: flex; align-items: flex-start; gap: 11px; }
+    .benefit-icon { width: 36px; height: 36px; flex: 0 0 36px; display: grid; place-items: center; background: white; color: var(--forest); border-radius: 11px; font-size: 1rem; }
+    .benefit-list strong { display: block; font-size: .85rem; margin-bottom: 3px; }
+    .benefit-list span { display: block; color: var(--muted); font-size: .75rem; line-height: 1.5; }
+
+    /* Process cards */
+    .steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 34px; }
+    .step { padding: 27px; border: 1px solid var(--line); background: var(--white); border-radius: 18px; }
+    .step-number { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; background: var(--forest-3); color: var(--forest); font: 800 1rem Manrope; }
+    .step h3 { font: 600 1.15rem "Playfair Display", Georgia, serif; margin: 17px 0 7px; }
+    .step p { color: var(--muted); font-size: .83rem; }
+
+    /* CTA */
+    .cta-section { padding-top: 25px; }
+    .cta-panel { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 25px; padding: clamp(30px, 5vw, 58px); background: var(--forest); color: white; border-radius: 27px; overflow: hidden; }
+    .cta-panel::after { content: "✳"; position: absolute; font-size: 16rem; line-height: 1; right: 24%; top: -45px; color: rgba(255,255,255,.045); pointer-events: none; }
+    .cta-copy { max-width: 680px; position: relative; z-index: 1; }
+    .cta-copy .eyebrow { color: #d7bf97; }
+    .cta-copy h2 { font: 500 clamp(2rem, 4vw, 3.5rem)/1.12 "Playfair Display", Georgia, serif; margin: 13px 0 12px; }
+    .cta-copy p { color: #d2ded7; max-width: 570px; font-size: .9rem; }
+    .cta-panel .btn { flex-shrink: 0; position: relative; z-index: 1; }
+
+    /* FAQ */
+    .faq-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 65px; }
+    .faq-intro h2 { font: 500 clamp(2.3rem,4vw,3.4rem)/1.1 "Playfair Display", Georgia, serif; margin: 14px 0; }
+    .faq-intro p { color: var(--muted); }
+    .faq-list { border-top: 1px solid var(--line); }
+    .faq-item { border-bottom: 1px solid var(--line); }
+    .faq-question { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 21px 0; background: transparent; border: 0; cursor: pointer; text-align: left; font-weight: 800; font-size: .9rem; }
+    .faq-question span:last-child { color: var(--gold); font-size: 1.3rem; transition: transform .2s; }
+    .faq-answer { color: var(--muted); font-size: .84rem; padding: 0 30px 20px 0; display: none; }
+    .faq-item.open .faq-answer { display: block; }
+    .faq-item.open .faq-question span:last-child { transform: rotate(45deg); }
+
+    /* Footer */
+    .footer { background: #112e28; color: #f8f7f2; padding: 58px 0 23px; }
+    .footer-grid { display: grid; grid-template-columns: 1.55fr .8fr .8fr 1fr; gap: 35px; padding-bottom: 42px; }
+    .footer .brand-mark { background: var(--gold); color: var(--forest); }
+    .footer-about p { color: #bdcec4; max-width: 300px; font-size: .82rem; margin-top: 15px; }
+    .footer h3 { font: 700 .87rem Manrope, sans-serif; margin-bottom: 16px; color: white; }
+    .footer ul { list-style: none; display: grid; gap: 10px; color: #bdcec4; font-size: .81rem; }
+    .footer a:hover { color: #e3bd80; }
+    .footer-contact { color: #bdcec4; font-size: .81rem; }
+    .footer-contact p { margin-bottom: 8px; overflow-wrap: anywhere; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.15); padding-top: 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; color: #9fb6aa; font-size: .72rem; }
+
+    /* Booking modal */
+    .modal-backdrop { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(10,27,22,.65); backdrop-filter: blur(5px); }
+    .modal-backdrop.show { display: flex; }
+    .booking-modal { width: min(520px, 100%); max-height: 92vh; overflow: auto; position: relative; background: var(--paper); border-radius: 23px; padding: 30px; box-shadow: 0 30px 80px #0004; }
+    .modal-close { position: absolute; right: 17px; top: 17px; width: 38px; height: 38px; border: 1px solid var(--line); background: white; border-radius: 50%; cursor: pointer; font-size: 1.2rem; }
+    .booking-modal h2 { font: 500 2rem "Playfair Display", Georgia, serif; margin: 10px 45px 8px 0; }
+    .booking-modal > p { color: var(--muted); font-size: .85rem; margin-bottom: 20px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+    .form-field { display: grid; gap: 6px; margin-bottom: 13px; }
+    .form-field.full { grid-column: 1/-1; }
+    .form-field label { font-size: .76rem; font-weight: 800; }
+    .form-field input, .form-field select, .form-field textarea { width: 100%; border: 1px solid #dfe2d9; border-radius: 11px; background: white; padding: 11px 12px; outline: none; font-size: .85rem; }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--forest-2); box-shadow: 0 0 0 3px rgba(36,87,75,.1); }
+    .booking-modal .btn { width: 100%; margin-top: 5px; }
+    .modal-disclaimer { font-size: .69rem !important; color: var(--muted); margin: 12px 0 0 !important; }
+
+    @media (max-width: 980px) {
+      .nav-links { gap: 15px; }
+      .nav-links a { font-size: .8rem; }
+      .nav-actions .btn { padding: 11px 15px; font-size: .78rem; }
+      .hero-panel { grid-template-columns: 1fr 1fr; min-height: 510px; }
+      .hero-visual { min-height: 510px; }
+      .hero-copy { padding: 38px; }
+      .trip-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .footer-grid { grid-template-columns: 1.3fr 1fr 1fr; }
+      .footer-contact-col { grid-column: 2 / 4; }
+    }
+    @media (max-width: 700px) {
+      .section { padding: 67px 0; }
+      .nav { min-height: 70px; }
+      .menu-toggle { display: grid; place-items: center; }
+      .nav-actions .btn { display: none; }
+      .nav-links { display: none; position: absolute; top: 70px; left: 0; right: 0; padding: 12px 4.25% 20px; background: var(--paper); border-bottom: 1px solid var(--line); align-items: stretch; flex-direction: column; gap: 3px; box-shadow: 0 15px 25px #173d3510; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 11px 4px; font-size: .9rem; }
+      .hero { padding-top: 16px; }
+      .hero-panel { grid-template-columns: 1fr; border-radius: 22px; }
+      .hero-copy { padding: 35px 27px 28px; }
+      .hero-copy h1 { font-size: clamp(3rem, 12vw, 4.7rem); }
+      .hero-copy > p { font-size: .91rem; }
+      .hero-visual { min-height: 300px; }
+      .hero-visual::after { background: linear-gradient(0deg, rgba(23,61,53,.1), transparent 40%); }
+      .hero-location { top: 15px; right: 15px; }
+      .hero-caption { right: 15px; bottom: 15px; }
+      .search-shell { margin-top: 16px; }
+      .search-panel { grid-template-columns: 1fr 1fr; gap: 7px; padding: 12px; }
+      .search-field { border-right: 0; border-bottom: 1px solid var(--line); padding: 9px 8px 13px; }
+      .search-field:nth-child(2) { border-bottom: 1px solid var(--line); }
+      .search-panel .btn { grid-column: 1/-1; margin-top: 4px; }
+      .destinations-section { padding-top: 65px; }
+      .section-heading { align-items: flex-start; flex-direction: column; gap: 15px; }
+      .section-heading h2 { font-size: clamp(2.2rem, 9vw, 3.2rem); }
+      .trip-toolbar { align-items: flex-start; }
+      .toolbar-right { width: 100%; justify-content: space-between; }
+      .chip { padding: 8px 12px; }
+      .trip-grid { grid-template-columns: 1fr; gap: 18px; }
+      .trip-image { height: 245px; }
+      .trip-description { min-height: 0; }
+      .editorial-grid { grid-template-columns: 1fr; gap: 30px; }
+      .editorial-photos { min-height: 365px; }
+      .editorial-main { height: 340px; width: 83%; }
+      .editorial-small { height: 155px; }
+      .editorial-stamp { width: 76px; height: 76px; font-size: .61rem; }
+      .benefit-list { gap: 17px 12px; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .step { padding: 23px; }
+      .cta-panel { flex-direction: column; align-items: flex-start; padding: 32px 25px; }
+      .cta-panel::after { right: -5%; top: 10px; }
+      .faq-layout { grid-template-columns: 1fr; gap: 25px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 29px 20px; }
+      .footer-about { grid-column: 1/-1; }
+      .footer-contact-col { grid-column: auto; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 390px) {
+      .container { width: 92%; }
+      .hero-copy { padding-inline: 21px; }
+      .hero-copy h1 { letter-spacing: -1.6px; }
+      .hero-proof { align-items: flex-start; }
+      .search-panel { grid-template-columns: 1fr; }
+      .search-field { border-bottom: 1px solid var(--line) !important; }
+      .benefit-list { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-field.full { grid-column: auto; }
+      .booking-modal { padding: 24px 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#beranda" aria-label="Arunika Travel, beranda">
+        <span class="brand-mark">✦</span><span class="brand-text">arunika<span>.</span></span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Navigasi utama">
+        <a href="#beranda">Beranda</a>
+        <a href="#destinasi">Destinasi</a>
+        <a href="#tentang">Tentang Kami</a>
+        <a href="#cara-pesan">Cara Pesan</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-primary" href="#destinasi">Temukan Trip <span>↗</span></a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Buka menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="beranda">
+      <div class="container">
+        <div class="hero-panel">
+          <div class="hero-copy">
+            <div class="eyebrow">CURATED JOURNEYS · INDONESIA</div>
+            <h1 class="serif">Bukan sekadar pergi. <em>Rasakan dunia.</em></h1>
+            <p>Temukan sudut-sudut istimewa Indonesia lewat perjalanan yang lebih personal, nyaman, dan penuh cerita.</p>
+            <div class="hero-buttons">
+              <a class="btn btn-gold" href="#destinasi">Jelajahi Destinasi <span>↗</span></a>
+              <a class="btn btn-outline" href="#tentang">Kenali Arunika</a>
+            </div>
+            <div class="hero-proof">
+              <div class="proof-avatars" aria-hidden="true">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=90&h=90&fit=crop&crop=faces" alt="">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=90&h=90&fit=crop&crop=faces" alt="">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=90&h=90&fit=crop&crop=faces" alt="">
+              </div>
+              <div><strong>Inspirasi untuk perjalananmu</strong><br><span>Mulai dari liburan santai sampai petualangan alam.</span></div>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1300&q=88" alt="Panorama pulau tropis di Indonesia" fetchpriority="high">
+            <div class="hero-location">✧ PILIHAN MINGGU INI</div>
+            <div class="hero-caption"><small>DESTINASI PILIHAN</small><strong>Ubud, Bali</strong><span>● Alam · Budaya · Slow living</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container search-shell">
+      <form class="search-panel" id="searchForm">
+        <div class="search-field">
+          <label for="searchName">DESTINASI IMPIAN</label>
+          <input id="searchName" type="search" placeholder="Cari Bali, Bromo, Labuan Bajo...">
+        </div>
+        <div class="search-field">
+          <label for="searchCategory">GAYA LIBURAN</label>
+          <select id="searchCategory">
+            <option value="all">Semua jenis wisata</option>
+            <option value="pantai">Pantai & pulau</option>
+            <option value="alam">Alam & pegunungan</option>
+            <option value="budaya">Budaya & kota</option>
+          </select>
+        </div>
+        <div class="search-field">
+          <label for="searchBudget">ANGGARAN PAKET</label>
+          <select id="searchBudget">
+            <option value="all">Semua harga</option>
+            <option value="500000">Maks. Rp500 ribu</option>
+            <option value="1000000">Maks. Rp1 juta</option>
+            <option value="2000000">Maks. Rp2 juta</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" type="submit">⌕ Cari Perjalanan</button>
+      </form>
+    </div>
+
+    <section class="section destinations-section" id="destinasi">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">THE COLLECTION</div>
+            <h2 class="serif">Tempat yang memanggilmu.</h2>
+            <p>Temukan pantai yang tenang, lanskap pegunungan, hingga kota penuh cerita. Pilih satu untuk memulai petualanganmu.</p>
+          </div>
+          <a class="side-link" href="#cara-pesan">Cara memesan paket ↗</a>
+        </div>
+
+        <div class="trip-toolbar">
+          <div class="filter-chips" aria-label="Filter kategori destinasi">
+            <button class="chip active" data-filter="all" type="button">Semua destinasi</button>
+            <button class="chip" data-filter="pantai" type="button">Pantai & pulau</button>
+            <button class="chip" data-filter="alam" type="button">Alam & gunung</button>
+            <button class="chip" data-filter="budaya" type="button">Budaya & kota</button>
+            <button class="chip" data-filter="favorit" type="button">♡ Favorit saya</button>
+          </div>
+          <div class="toolbar-right">
+            <span class="results-count" id="resultsCount" aria-live="polite">15 destinasi</span>
+            <select class="sort-select" id="sortSelect" aria-label="Urutkan destinasi">
+              <option value="featured">Pilihan kami</option>
+              <option value="price-asc">Harga terendah</option>
+              <option value="price-desc">Harga tertinggi</option>
+              <option value="name">Nama A–Z</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="trip-grid" id="tripGrid">
+          <!-- Kartu destinasi dibuat dari data JavaScript supaya mudah ditambah dan diedit. -->
+        </div>
+        <div class="load-row">
+          <button class="btn btn-outline" id="resetFilters" type="button">Tampilkan Semua Destinasi ↻</button>
+        </div>
+        <p class="muted" style="font-size:.72rem;margin-top:19px">Catatan: harga dan durasi merupakan contoh untuk tampilan demo, bukan penawaran resmi. Konfirmasi rincian paket sebelum melakukan pembayaran.</p>
+      </div>
+    </section>
+
+    <section class="section editorial" id="tentang">
+      <div class="container editorial-grid">
+        <div class="editorial-photos">
+          <img class="editorial-main" src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1000&q=85" alt="Danau pegunungan dengan air jernih" loading="lazy">
+          <img class="editorial-small" src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=650&q=85" alt="Pemandangan alam danau yang tenang" loading="lazy">
+          <div class="editorial-stamp">GO SLOW<br>SEE MORE<br>✦</div>
+        </div>
+        <div class="editorial-copy">
+          <div class="eyebrow">OUR PHILOSOPHY</div>
+          <h2 class="serif">Perjalanan terbaik terasa sampai kamu pulang.</h2>
+          <p>Arunika hadir sebagai konsep travel yang mengutamakan pengalaman. Bukan cuma mengejar banyak lokasi, tetapi juga memberi waktu untuk menikmati suasana, bertemu orang baru, dan mengenal budaya setempat.</p>
+          <ul class="benefit-list">
+            <li><span class="benefit-icon">✧</span><div><strong>Perjalanan terkurasi</strong><span>Pilihan destinasi untuk beragam gaya liburan.</span></div></li>
+            <li><span class="benefit-icon">⌖</span><div><strong>Nuansa lokal</strong><span>Temukan budaya, kuliner, dan cerita setempat.</span></div></li>
+            <li><span class="benefit-icon">♡</span><div><strong>Lebih personal</strong><span>Mulai dari liburan singkat sampai trip bersama.</span></div></li>
+            <li><span class="benefit-icon">✓</span><div><strong>Info yang jelas</strong><span>Rincian paket dikonfirmasi sebelum pemesanan.</span></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cara-pesan">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">SIMPLE & EASY</div>
+            <h2 class="serif">Tiga langkah menuju liburan.</h2>
+            <p>Mulai dari mencari inspirasi hingga mengobrol soal detail paket. Semuanya dibuat sederhana.</p>
+          </div>
+        </div>
+        <div class="steps-grid">
+          <article class="step"><div class="step-number">01</div><h3>Temukan tujuanmu</h3><p>Gunakan pencarian dan filter untuk menemukan tempat yang sesuai dengan minat dan anggaranmu.</p></article>
+          <article class="step"><div class="step-number">02</div><h3>Pilih paket perjalanan</h3><p>Buka tombol pesan, lalu siapkan tanggal, jumlah peserta, dan pertanyaan tentang paket.</p></article>
+          <article class="step"><div class="step-number">03</div><h3>Konfirmasi bersama tim</h3><p>Diskusikan ketersediaan, rincian biaya, fasilitas, dan ketentuan sebelum melakukan pembayaran.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-section">
+      <div class="container">
+        <div class="cta-panel">
+          <div class="cta-copy">
+            <div class="eyebrow">YOUR NEXT CHAPTER</div>
+            <h2 class="serif">Ada banyak cerita di luar sana. Yuk, mulai satu.</h2>
+            <p>Pilih tujuan yang selama ini ada di daftar impianmu, lalu tanyakan paketnya kepada tim Arunika.</p>
+          </div>
+          <a class="btn btn-gold" href="#destinasi">Cari Inspirasi <span>↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container faq-layout">
+        <div class="faq-intro">
+          <div class="eyebrow">GOOD TO KNOW</div>
+          <h2 class="serif">Ada yang ingin kamu tanyakan?</h2>
+          <p>Berikut beberapa hal yang sebaiknya diketahui sebelum memilih paket perjalanan.</p>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false"><span>Apakah harga yang tertera sudah final?</span><span>＋</span></button>
+            <div class="faq-answer">Belum. Harga dalam website ini adalah contoh untuk tampilan demo. Minta penawaran terbaru yang mencantumkan fasilitas, tiket, transportasi, akomodasi, dan biaya tambahan jika ada.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false"><span>Bagaimana cara menanyakan paket wisata?</span><span>＋</span></button>
+            <div class="faq-answer">Klik tombol “Pesan paket” pada destinasi, isi informasi perjalanan, lalu lanjutkan ke WhatsApp. Pastikan nomor WhatsApp bisnis sudah diganti di bagian konfigurasi JavaScript.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false"><span>Apakah saya bisa mengubah tanggal perjalanan?</span><span>＋</span></button>
+            <div class="faq-answer">Tanggal dan ketersediaan perlu dikonfirmasi dengan penyedia paket. Ketentuan perubahan jadwal bisa berbeda menurut transportasi, akomodasi, dan jenis paket.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false"><span>Apakah website ini sudah menyimpan pemesanan?</span><span>＋</span></button>
+            <div class="faq-answer">Belum. Website ini adalah front-end HTML, CSS, dan JavaScript. Permintaan booking diteruskan ke WhatsApp; belum ada database, dashboard admin, atau sistem pembayaran otomatis.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="kontak">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <a class="brand" href="#beranda"><span class="brand-mark">✦</span><span class="brand-text">arunika<span>.</span></span></a>
+          <p>Ruang untuk menemukan tempat baru, merasakan pengalaman berbeda, dan membawa pulang cerita yang berarti.</p>
+        </div>
+        <div><h3>Jelajahi</h3><ul><li><a href="#destinasi">Semua destinasi</a></li><li><a href="#destinasi">Pantai & pulau</a></li><li><a href="#destinasi">Alam & gunung</a></li><li><a href="#destinasi">Budaya & kota</a></li></ul></div>
+        <div><h3>Informasi</h3><ul><li><a href="#tentang">Tentang Arunika</a></li><li><a href="#cara-pesan">Cara pemesanan</a></li><li><a href="#faq">Pertanyaan umum</a></li><li><a href="#kontak">Kontak</a></li></ul></div>
+        <div class="footer-contact-col"><h3>Hubungi kami</h3><div class="footer-contact"><p>WhatsApp: nomor bisnis kamu</p><p>Email: halo@arunika.example</p><p>Instagram: @arunika.travel</p><p style="font-size:.7rem;margin-top:12px;color:#8fa99b">Ganti informasi kontak contoh sebelum website dipublikasikan.</p></div></div>
+      </div>
+      <div class="footer-bottom"><span>© <span id="currentYear">2026</span> Arunika Travel. Website demo.</span><span>Dibuat untuk para penjelajah ✦</span></div>
+    </div>
+  </footer>
+
+  <!-- Modal booking: permintaan akan disusun ke WhatsApp, bukan disimpan di database. -->
+  <div class="modal-backdrop" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="booking-modal">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Tutup formulir">×</button>
+      <div class="eyebrow">LET'S PLAN YOUR TRIP</div>
+      <h2 id="modalTitle">Rencanakan perjalananmu.</h2>
+      <p id="modalDescription">Isi beberapa detail supaya tim dapat memahami rencana perjalananmu.</p>
+      <form id="bookingForm">
+        <div class="form-grid">
+          <div class="form-field full"><label for="bookingDestination">Destinasi pilihan</label><input id="bookingDestination" name="destination" readonly required></div>
+          <div class="form-field"><label for="travelerName">Nama</label><input id="travelerName" name="name" placeholder="Nama kamu" required maxlength="80"></div>
+          <div class="form-field"><label for="travelerCount">Jumlah peserta</label><select id="travelerCount" name="travelerCount"><option>1 orang</option><option selected>2 orang</option><option>3 orang</option><option>4 orang</option><option>5 orang</option><option>6+ orang</option></select></div>
+          <div class="form-field"><label for="travelDate">Tanggal rencana</label><input id="travelDate" name="date" type="date"></div>
+          <div class="form-field"><label for="travelDuration">Durasi</label><select id="travelDuration" name="duration"><option>Belum ditentukan</option><option>1 hari</option><option>2 hari 1 malam</option><option>3 hari 2 malam</option><option>4 hari 3 malam</option><option>5 hari atau lebih</option></select></div>
+          <div class="form-field full"><label for="travelNotes">Catatan tambahan (opsional)</label><textarea id="travelNotes" name="notes" rows="3" placeholder="Misalnya, ingin private trip atau bertanya tentang fasilitas."></textarea></div>
+        </div>
+        <button class="btn btn-primary" type="submit">Lanjutkan ke WhatsApp ↗</button>
+        <p class="modal-disclaimer">Dengan melanjutkan, detail di atas akan disusun menjadi pesan WhatsApp. Belum ada pembayaran atau booking otomatis yang dilakukan.</p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    /*
+      PENGATURAN WEBSITE:
+      1. Ganti nomorWhatsApp dengan nomor bisnis, menggunakan kode negara tanpa tanda +.
+      2. Harga, durasi, dan rating di bawah merupakan data DEMO.
+      3. Ganti tautan gambar dengan gambar milik sendiri bila diperlukan.
+    */
+    const nomorWhatsApp = "6281234567890";
+
+    const destinations = [
+      { id: "bali", name: "Bali", title: "Pesona Pulau Dewata", location: "Bali, Indonesia", category: "pantai", price: 850000, duration: "3 hari 2 malam", rating: "4.9", badge: "Favorit", description: "Pantai tropis, pura bersejarah, sawah hijau, dan senja yang menenangkan.", image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=85", alt: "Pura dan lanskap tropis Bali" },
+      { id: "raja-ampat", name: "Raja Ampat", title: "Surga Bahari Timur", location: "Raja Ampat, Papua Barat Daya", category: "pantai", price: 1850000, duration: "4 hari 3 malam", rating: "5.0", badge: "Bahari", description: "Air sebening kristal, pulau karst, dan panorama bawah laut yang kaya.", image: "https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&w=900&q=85", alt: "Pulau tropis di tengah laut biru" },
+      { id: "bromo", name: "Gunung Bromo", title: "Mengejar Cahaya Pagi", location: "Jawa Timur, Indonesia", category: "alam", price: 450000, duration: "2 hari 1 malam", rating: "4.9", badge: "Sunrise", description: "Jelajah lautan pasir, udara pegunungan, dan panorama matahari terbit.", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=85", alt: "Puncak pegunungan diselimuti kabut" },
+      { id: "jogja", name: "Yogyakarta", title: "Jejak Budaya Jawa", location: "DI Yogyakarta, Indonesia", category: "budaya", price: 390000, duration: "2 hari 1 malam", rating: "4.8", badge: "Budaya", description: "Candi, sudut kota penuh cerita, kerajinan lokal, dan kuliner legendaris.", image: "https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=900&q=85", alt: "Candi bersejarah di Jawa" },
+      { id: "lombok", name: "Lombok", title: "Ritme Santai Tropis", location: "Nusa Tenggara Barat", category: "pantai", price: 990000, duration: "3 hari 2 malam", rating: "4.9", badge: "Pantai", description: "Pasir putih, garis pantai dramatis, dan air laut biru kehijauan.", image: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=900&q=85", alt: "Pantai tropis dengan pasir putih" },
+      { id: "bandung", name: "Bandung", title: "Pelarian ke Alam Hijau", location: "Jawa Barat, Indonesia", category: "alam", price: 320000, duration: "2 hari 1 malam", rating: "4.7", badge: "Weekend", description: "Hutan pinus, udara sejuk, kedai kopi, dan waktu istirahat dari rutinitas.", image: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=900&q=85", alt: "Hutan hijau dengan pepohonan tinggi" },
+      { id: "labuan-bajo", name: "Labuan Bajo", title: "Pelayaran ke Komodo", location: "Flores, Nusa Tenggara Timur", category: "pantai", price: 1750000, duration: "3 hari 2 malam", rating: "4.9", badge: "Ikonik", description: "Bukit savana, pulau-pulau kecil, dan pesona laut Flores.", image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=85", alt: "Laut tropis untuk petualangan kapal" },
+      { id: "dieng", name: "Dieng", title: "Negeri di Atas Awan", location: "Wonosobo, Jawa Tengah", category: "alam", price: 420000, duration: "2 hari 1 malam", rating: "4.8", badge: "Sejuk", description: "Telaga warna, lanskap berkabut, dan matahari pagi di dataran tinggi.", image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85", alt: "Danau pegunungan dan lanskap berkabut" },
+      { id: "toba", name: "Danau Toba", title: "Tenang di Tanah Batak", location: "Sumatera Utara, Indonesia", category: "alam", price: 780000, duration: "3 hari 2 malam", rating: "4.8", badge: "Danau", description: "Danau vulkanik luas, budaya Batak, dan panorama perbukitan hijau.", image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=85", alt: "Danau luas di antara perbukitan" },
+      { id: "belitung", name: "Belitung", title: "Batu Granit & Laut Biru", location: "Kepulauan Bangka Belitung", category: "pantai", price: 890000, duration: "3 hari 2 malam", rating: "4.8", badge: "Island hop", description: "Pantai berpasir cerah, batu granit besar, dan jelajah pulau kecil.", image: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85", alt: "Ombak laut biru di pantai tropis" },
+      { id: "jakarta", name: "Jakarta", title: "Kota dalam Cerita", location: "DKI Jakarta, Indonesia", category: "budaya", price: 250000, duration: "1 hari", rating: "4.6", badge: "City trip", description: "Bangunan bersejarah, museum, seni, dan petualangan kuliner urban.", image: "https://images.unsplash.com/photo-1538970272646-f61fabb3a8a2?auto=format&fit=crop&w=900&q=85", alt: "Pemandangan kota modern" },
+      { id: "malang", name: "Malang", title: "Kota Sejuk dan Ceria", location: "Jawa Timur, Indonesia", category: "budaya", price: 360000, duration: "2 hari 1 malam", rating: "4.7", badge: "Keluarga", description: "Kampung warna-warni, udara pegunungan, dan pilihan kuliner lokal.", image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=85", alt: "Lanskap pegunungan saat senja" },
+      { id: "wakatobi", name: "Wakatobi", title: "Dunia Bawah Laut", location: "Sulawesi Tenggara, Indonesia", category: "pantai", price: 1650000, duration: "4 hari 3 malam", rating: "4.9", badge: "Diving", description: "Perairan jernih dan kekayaan terumbu karang untuk pencinta bahari.", image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=85", alt: "Petualangan menyelam di perairan tropis" },
+      { id: "toraja", name: "Tana Toraja", title: "Warisan di Pegunungan", location: "Sulawesi Selatan, Indonesia", category: "budaya", price: 1250000, duration: "3 hari 2 malam", rating: "4.8", badge: "Tradisi", description: "Rumah adat Tongkonan, lanskap hijau, dan warisan budaya yang unik.", image: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=900&q=85", alt: "Lanskap hijau dengan suasana pedesaan" },
+      { id: "sentani", name: "Danau Sentani", title: "Pesona Papua yang Teduh", location: "Papua, Indonesia", category: "alam", price: 1380000, duration: "3 hari 2 malam", rating: "4.8", badge: "Hidden gem", description: "Danau luas, perbukitan, dan kesempatan mengenal seni lokal Papua.", image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=85", alt: "Pemandangan alam luas dan hijau" }
+    ];
+
+    const tripGrid = document.getElementById("tripGrid");
+    const searchName = document.getElementById("searchName");
+    const searchCategory = document.getElementById("searchCategory");
+    const searchBudget = document.getElementById("searchBudget");
+    const sortSelect = document.getElementById("sortSelect");
+    const resultsCount = document.getElementById("resultsCount");
+    const chips = [...document.querySelectorAll(".chip")];
+    let activeFilter = "all";
+    let favorites = new Set();
+
+    try {
+      favorites = new Set(JSON.parse(localStorage.getItem("arunika-favorites") || "[]"));
+    } catch (error) {
+      favorites = new Set();
+    }
+
+    const formatPrice = value => "Rp" + value.toLocaleString("id-ID");
+    const categoryNames = {
+      pantai: "Pantai & pulau",
+      alam: "Alam & pegunungan",
+      budaya: "Budaya & kota"
+    };
+
+    function cardTemplate(trip) {
+      const saved = favorites.has(trip.id);
+      return `
+        <article class="trip-card">
+          <div class="trip-image">
+            <img src="${trip.image}" alt="${trip.alt}" loading="lazy">
+            <span class="trip-badge">${trip.badge}</span>
+            <button class="icon-btn favorite-btn ${saved ? "saved" : ""}" type="button"
+              data-favorite="${trip.id}" aria-label="${saved ? "Hapus dari favorit" : "Tambahkan ke favorit"}"
+              aria-pressed="${saved}">${saved ? "♥" : "♡"}</button>
+          </div>
+          <div class="trip-content">
+            <div class="trip-place"><span>⌖ ${trip.location}</span><span class="trip-rating">★ ${trip.rating}</span></div>
+            <h3 class="trip-title">${trip.title}</h3>
+            <p class="trip-description">${trip.description}</p>
+            <div class="trip-meta"><span>◷ ${trip.duration}</span><span>✧ ${categoryNames[trip.category]}</span></div>
+            <div class="trip-footer">
+              <div class="trip-price"><small>Harga contoh mulai dari</small><strong>${formatPrice(trip.price)}</strong><span> / orang</span></div>
+              <button class="trip-book" type="button" data-book="${trip.id}">Pesan paket ↗</button>
+            </div>
+          </div>
+        </article>`;
+    }
+
+    function renderTrips() {
+      const keyword = searchName.value.trim().toLocaleLowerCase("id-ID");
+      const budgetValue = searchBudget.value;
+      let shown = destinations.filter(trip => {
+        const searchText = `${trip.name} ${trip.title} ${trip.location} ${trip.description} ${trip.category}`.toLocaleLowerCase("id-ID");
+        const matchesKeyword = searchText.includes(keyword);
+        const matchesFilter = activeFilter === "all" ||
+          (activeFilter === "favorit" ? favorites.has(trip.id) : trip.category === activeFilter);
+        const matchesCategory = searchCategory.value === "all" || trip.category === searchCategory.value;
+        const matchesBudget = budgetValue === "all" || trip.price <= Number(budgetValue);
+        return matchesKeyword && matchesFilter && matchesCategory && matchesBudget;
+      });
+
+      if (sortSelect.value === "price-asc") shown.sort((a, b) => a.price - b.price);
+      if (sortSelect.value === "price-desc") shown.sort((a, b) => b.price - a.price);
+      if (sortSelect.value === "name") shown.sort((a, b) => a.name.localeCompare(b.name, "id"));
+
+      resultsCount.textContent = `${shown.length} destinasi`;
+      if (!shown.length) {
+        tripGrid.innerHTML = `<div class="empty-state"><strong>Belum ketemu destinasi yang cocok.</strong><br><span>Coba kata kunci lain atau reset filter pencarianmu.</span></div>`;
+        return;
+      }
+      tripGrid.innerHTML = shown.map(cardTemplate).join("");
+    }
+
+    chips.forEach(chip => {
+      chip.addEventListener("click", () => {
+        activeFilter = chip.dataset.filter;
+        chips.forEach(item => item.classList.toggle("active", item === chip));
+        // Filter kategori tetap konsisten dengan chip yang dipilih.
+        searchCategory.value = ["pantai", "alam", "budaya"].includes(activeFilter) ? activeFilter : "all";
+        renderTrips();
+      });
+    });
+
+    document.getElementById("searchForm").addEventListener("submit", event => {
+      event.preventDefault();
+      activeFilter = "all";
+      chips.forEach(chip => chip.classList.toggle("active", chip.dataset.filter === "all"));
+      renderTrips();
+      document.getElementById("destinasi").scrollIntoView({ behavior: "smooth" });
+    });
+    searchCategory.addEventListener("change", () => {
+      activeFilter = "all";
+      chips.forEach(chip => chip.classList.toggle("active", chip.dataset.filter === "all"));
+      renderTrips();
+    });
+    searchBudget.addEventListener("change", renderTrips);
+    sortSelect.addEventListener("change", renderTrips);
+    searchName.addEventListener("input", renderTrips);
+
+    document.getElementById("resetFilters").addEventListener("click", () => {
+      searchName.value = "";
+      searchCategory.value = "all";
+      searchBudget.value = "all";
+      sortSelect.value = "featured";
+      activeFilter = "all";
+      chips.forEach(chip => chip.classList.toggle("active", chip.dataset.filter === "all"));
+      renderTrips();
+    });
+
+    // Event delegation membuat tombol tetap berfungsi setelah kartu dirender ulang.
+    tripGrid.addEventListener("click", event => {
+      const favoriteButton = event.target.closest("[data-favorite]");
+      const bookingButton = event.target.closest("[data-book]");
+
+      if (favoriteButton) {
+        const id = favoriteButton.dataset.favorite;
+        if (favorites.has(id)) favorites.delete(id);
+        else favorites.add(id);
+        try { localStorage.setItem("arunika-favorites", JSON.stringify([...favorites])); } catch (error) {}
+        renderTrips();
+        return;
+      }
+      if (bookingButton) openBooking(bookingButton.dataset.book);
+    });
+
+    // Modal booking
+    const modal = document.getElementById("bookingModal");
+    const destinationInput = document.getElementById("bookingDestination");
+    const nameInput = document.getElementById("travelerName");
+    let previouslyFocused = null;
+
+    function openBooking(id) {
+      const trip = destinations.find(item => item.id === id);
+      if (!trip) return;
+      destinationInput.value = `${trip.title} — ${trip.location}`;
+      document.getElementById("modalDescription").textContent =
+        `Kamu memilih ${trip.title}. Harga di halaman ini masih contoh; tanyakan penawaran aktual kepada tim Arunika.`;
+      previouslyFocused = document.activeElement;
+      modal.classList.add("show");
+      document.body.classList.add("no-scroll");
+      setTimeout(() => nameInput.focus(), 50);
+    }
+
+    function closeBooking() {
+      modal.classList.remove("show");
+      document.body.classList.remove("no-scroll");
+      if (previouslyFocused && previouslyFocused.focus) previouslyFocused.focus();
+    }
+
+    document.getElementById("modalClose").addEventListener("click", closeBooking);
+    modal.addEventListener("click", event => {
+      if (event.target === modal) closeBooking();
+    });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && modal.classList.contains("show")) closeBooking();
+    });
+
+    document.getElementById("bookingForm").addEventListener("submit", event => {
+      event.preventDefault();
+      const name = document.getElementById("travelerName").value.trim();
+      const destination = destinationInput.value;
+      const count = document.getElementById("travelerCount").value;
+      const date = document.getElementById("travelDate").value || "Belum ditentukan";
+      const duration = document.getElementById("travelDuration").value;
+      const notes = document.getElementById("travelNotes").value.trim() || "Tidak ada";
+      const message = [
+        "Halo Arunika Travel, saya ingin bertanya tentang paket perjalanan.",
+        "",
+        `Destinasi: ${destination}`,
+        `Nama: ${name}`,
+        `Jumlah peserta: ${count}`,
+        `Rencana tanggal: ${date}`,
+        `Durasi: ${duration}`,
+        `Catatan: ${notes}`,
+        "",
+        "Mohon info harga terbaru, ketersediaan, fasilitas, dan ketentuan booking. Terima kasih."
+      ].join("\n");
+
+      if (!/^\d{8,15}$/.test(nomorWhatsApp)) {
+        alert("Nomor WhatsApp belum valid. Silakan ganti variabel nomorWhatsApp di bagian JavaScript dengan kode negara dan nomor bisnis, tanpa tanda +, spasi, atau strip.");
+        return;
+      }
+      window.open(`https://wa.me/${nomorWhatsApp}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+      closeBooking();
+    });
+
+    // FAQ accordion
+    document.querySelectorAll(".faq-question").forEach(button => {
+      button.addEventListener("click", () => {
+        const item = button.closest(".faq-item");
+        const willOpen = !item.classList.contains("open");
+        document.querySelectorAll(".faq-item").forEach(row => {
+          row.classList.remove("open");
+          row.querySelector(".faq-question").setAttribute("aria-expanded", "false");
+        });
+        if (willOpen) {
+          item.classList.add("open");
+          button.setAttribute("aria-expanded", "true");
+        }
+      });
+    });
+
+    // Mobile navigation
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    menuToggle.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(open));
+      menuToggle.textContent = open ? "×" : "☰";
+    });
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "☰";
+      });
+    });
+
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+    renderTrips();
+  </script>
+</body>
+</html>
